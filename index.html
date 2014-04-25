@@ -74,6 +74,11 @@
 <p><a href="http://kaz-utashiro.github.io/sdif/images/screen-shot-mecab-comp.jpg"><img src="http://kaz-utashiro.github.io/sdif/images/screen-shot-mecab-comp.jpg" alt="mecab"></a></p>
 
 <h1>
+<a name="using-inside-emacs" class="anchor" href="#using-inside-emacs"><span class="octicon octicon-link"></span></a>Using inside Emacs</h1>
+
+<p><a href="http://cdn-ak.f.st-hatena.com/images/fotolife/u/uta46/20140403/20140403170919.png"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/u/uta46/20140403/20140403170919.png" alt="emacs"></a></p>
+
+<h1>
 <a name="name" class="anchor" href="#name"><span class="octicon octicon-link"></span></a>NAME</h1>
 
 <p>cdif - word context diff</p>
@@ -100,14 +105,19 @@
     -r&lt;rev&gt;, -q     rcs options
 
     -B                  char-by-char comparison
+    -W                  specify terminal width
     --diff=command      specify diff command
     --stat              show statistical information
     --colormap=s        specify color map
-    --[no]color         color or not           (default true)
-    --[no]256           ANSI 256 color mode    (default true)
-    --[no]commandcolor  color for command line (default true)
-    --[no]markcolor     color for diff mark    (default true)
-    --[no]textcolor     color for normal text  (default true)
+    --[no]color         color or not            (default true)
+    --[no]256           ANSI 256 color mode     (default true)
+    --[no]commandcolor  color for command line  (default true)
+    --[no]markcolor     color for diff mark     (default true)
+    --[no]textcolor     color for normal text   (default true)
+    --[no]old           print old text          (default true)
+    --[no]new           print new text          (default true)
+    --[no]command       print diff command line (default true)
+    --[no]unknown       print unknown line      (default true)
 </code></pre>
 
 <h1>
@@ -135,15 +145,20 @@ printed.</p>
 <p>Almost same as <strong>diff</strong> command.</p>
 </li>
 <li>
-<p><strong>--rcs</strong>, <strong>-r</strong>_rev_, <strong>-q</strong></p>
+<p><strong>--rcs</strong>, <strong>-r___rev_, __-q</strong></p>
 
 <p>Use rcsdiff instead of normal diff.  Option <strong>--rcs</strong> is not required
-when <strong>-r</strong>_rev_ is supplied.</p>
+when __-r___rev_ is supplied.</p>
 </li>
 <li>
 <p><strong>-B</strong>, <strong>--char</strong></p>
 
 <p>Compare the data character-by-character context.</p>
+</li>
+<li>
+<p><strong>-W</strong> <em>width</em>, <strong>--width</strong>=<em>width</em></p>
+
+<p>Explicitly specify terminal width.</p>
 </li>
 <li>
 <p><strong>--diff</strong>=<em>command</em></p>
@@ -271,6 +286,35 @@ APPEND  =&gt; "RD/544"
 <p>Enable/Disable using color for the corresponding field.</p>
 </li>
 <li>
+<p><strong>--</strong>[<strong>no</strong>]<strong>old</strong>, <strong>--</strong>[<strong>no</strong>]<strong>new</strong></p>
+
+<p>Print or not old/new text in diff output.</p>
+</li>
+<li>
+<p><strong>--</strong>[<strong>no</strong>]<strong>command</strong></p>
+
+<p>Print or not command lines preceding diff output.</p>
+</li>
+<li>
+<p><strong>--</strong>[<strong>no</strong>]<strong>unknown</strong></p>
+
+<p>Print or not lines not look like diff output.</p>
+</li>
+<li>
+<p><strong>--</strong>[<strong>no</strong>]<strong>mark</strong></p>
+
+<p>Print or not marks at the top of diff output lines.  At this point,
+this option is effective only for unified diff.</p>
+
+<p>Next example produces the output exactly same as <em>new</em> except visual
+effects.</p>
+
+<pre><code>cdif -U100 --nomark --noold --nocommand --nounknown old new
+</code></pre>
+
+<p>These options are prepared for watchdiff(1) command.</p>
+</li>
+<li>
 <p><strong>--stat</strong></p>
 
 <p>Print statistical information at the end of output.  It shows number
@@ -295,7 +339,7 @@ option, external command <strong>mecab</strong> has to be installed.</p>
 <h1>
 <a name="see-also" class="anchor" href="#see-also"><span class="octicon octicon-link"></span></a>SEE ALSO</h1>
 
-<p>perl(1), diff(1)</p>
+<p>perl(1), diff(1), sdif(1), watchdiff(1)</p>
 
 <h1>
 <a name="bugs" class="anchor" href="#bugs"><span class="octicon octicon-link"></span></a>BUGS</h1>
